@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FlixExampleVC: UIViewController {
+class FlixExampleVC: SWBaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +16,20 @@ class FlixExampleVC: UIViewController {
         self.title = "Flix"
     }
     
-
+    let KFlixIdentifier = "FlixIdentifier"
     
+    override func tableViewData() {
+        let data1 = SWTableViewDataStruct.init(title: "FirstFlixExample", identifier: KFlixIdentifier)
+        dataList = [data1]
+    }
+}
 
+extension FlixExampleVC {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if (dataList[indexPath.row].identifier .elementsEqual(KFlixIdentifier)) {
+            let vc:FirstFlixExampleVC = FirstFlixExampleVC.init()
+            pushViewController(vc: vc, animated: true)
+        }
+    }
 }
